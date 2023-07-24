@@ -10,3 +10,7 @@
 
 # Tools used
  * Postman
+
+* Install dependencies using npm i
+* To run use the command npm run dev
+* Server link: http://localhost:5001/

@@ -1,5 +1,6 @@
 const db = require('../models');
 const Product = db.products;
+const Sku = db.skus;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
@@ -65,6 +66,30 @@ exports.update = (req, res) => {
     .catch(err => {
         res.status(500).send({
             message: `Error in updating product with id=${id}`
+        })
+    })
+}
+
+exports.delete = (req, res) => {
+    const id = req.params.id;
+
+    Product.destroy({
+        where: {id: id}
+    })
+    .then(num => {
+        if(num == 1){
+            res.send({
+                message: "product was deleted successfully."
+            })
+        }else{
+            res.send({
+                message: "To delete any product id should not be empty"
+            })
+        }
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: `Error in deleting product with id=${id}`
         })
     })
 }
